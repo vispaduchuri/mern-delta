@@ -3,14 +3,19 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import firebase from '../config/config';
 
+
+var storage = firebase.storage();
 const Movie = props => (
     console.log(props),
     <tr>
+        <td>
+        <img alt={props.movie.moviename} src={props.movie.src} />
+        </td>
       <td>{props.movie.moviename}</td>
       <td>{props.movie.yearofrelease}</td>
       <td>{props.movie.poster}</td>
       <td>{props.movie.plot}</td>
-
+        
       <td>{props.movie.cast}</td>
       <td>
         <Link to={"/edit/"+props.movie._id}>edit</Link> | <a href="#" onClick={() => { props.deletemovie(props.movie._id) }}>delete</a>
@@ -26,36 +31,45 @@ export default class MovieList extends Component {
 
         this.state= {
             movies : [],
+            src: [],
+           imgurl:[],
 
         }
     }
 
 
     componentDidMount(){
-        const imageIds=[];
+
+        
         axios.get('http://localhost:5000/movies/')
         .then(res => {
 
-            res.forEach(doc=>{
-                imageIds.push(doc.data().id);
-            })
+            // res.forEach(doc=>{
+            //     imageIds.push(doc.data().id);
+            // })
             this.setState({movies : res.data}, this.getImages);
         })
         .catch(err => {console.log(err);}
         )
+        
     }
 
     getImages(){
      
-        const {movies,imageIds}= this.state;
+        const {movies}= this.state;
         
-    //    console.log(cards)
-       console.log(imageIds)
+        const imageIds = [];
+         movies.forEach((doc )=>{
+            
+                imageIds.push(doc._id);
+                // console.log(doc._id);
+            })
+  
          const imagePromises = [];
          movies.forEach((card,i)=>{
-            //  console.log('1234')
-            console.log('Image Id',imageIds[i]);
-            const imageRef = storage.ref(`Products/${imageIds[i]}/image.png`);
+           console.log(imageIds[i]);
+            // console.log('Image Id',imageIds[i]);
+            const imageRef = storage.ref(`Moviez/${imageIds[i]}/image.png`);
             // 'gs://prodet-ku.appspot.com/Products/hOb3za4XBz4EqfU8FUJF/image.png'
             imagePromises.push(imageRef.getDownloadURL());
         })
@@ -65,7 +79,7 @@ export default class MovieList extends Component {
                 console.log(imageUrl)
                 movies[i].src = imageUrl; // Setting image Link retrieved from firebase storage to src property of the product
             })
-            // this.setState({cardsList})
+            this.setState({movies})
         })
     }
 
@@ -88,15 +102,18 @@ export default class MovieList extends Component {
     
     render() {
         return (
+           
             <div>
             <h3>Movies</h3>
             <table className="table">
               <thead className="thead-light">
                 <tr>
+                <th>Image</th>
                   <th>Movie Name</th>
                   <th>Year of Release</th>
                   <th>Poster</th>
                   <th>Plot</th>
+                  
                   <th>Cast</th>
                 </tr>
               </thead>
