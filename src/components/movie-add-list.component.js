@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import firebase from '../config/config';
 
 
 export default class MovieAddList extends Component {
@@ -13,7 +14,7 @@ export default class MovieAddList extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangecast = this.onChangecast.bind(this);
-
+        this.uploadFile = this.uploadFile.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         
@@ -53,6 +54,7 @@ export default class MovieAddList extends Component {
         console.log("unmounted!");
     }
 
+    
     onChangemoviename(e) {
         this.setState({
             moviename: e.target.value
@@ -85,6 +87,18 @@ export default class MovieAddList extends Component {
         })
     }
 
+     
+    uploadFile(event) {
+        const {moviename}=this.state;
+        var file = event.target.files[0];
+        console.log(file);
+        
+        var stor = firebase.storage().ref(moviename);
+        stor.put(file);
+          // axios.post('/files', data)...
+        }
+    
+
       onSubmit(e) {
         e.preventDefault();
     
@@ -98,8 +112,14 @@ export default class MovieAddList extends Component {
         console.log(movies);
         axios.post('http://localhost:5000/movies/add', movies)
         .then(res => console.log(res.data));
+
+       
+
         window.location='/';
     }
+
+    
+   
 
     
     render() {
@@ -135,6 +155,13 @@ export default class MovieAddList extends Component {
                 value={this.state.plot}
                 onChange={this.onChangeDescription}
                 />
+          </div>
+
+          <div className="upload-group" id="file">
+              <label>Upload Image : </label>
+              <input type="file" className="upload-group" onChange={this.uploadFile} id="fileButton"/>
+              
+              
           </div>
           {/* <div className="form-group"> 
             <label>Cast: </label>

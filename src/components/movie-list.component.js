@@ -57,11 +57,13 @@ export default class MovieList extends Component {
     getImages(){
      
         const {movies}= this.state;
-        
+        console.log(movies)
+        console.log(123)
         const imageIds = [];
+        
          movies.forEach((doc )=>{
             
-                imageIds.push(doc._id);
+                imageIds.push(doc.moviename);
                 // console.log(doc._id);
             })
   
@@ -69,7 +71,7 @@ export default class MovieList extends Component {
          movies.forEach((card,i)=>{
            console.log(imageIds[i]);
             // console.log('Image Id',imageIds[i]);
-            const imageRef = storage.ref(`Moviez/${imageIds[i]}/image.png`);
+            const imageRef = storage.ref(`${imageIds[i]}`);
             // 'gs://prodet-ku.appspot.com/Products/hOb3za4XBz4EqfU8FUJF/image.png'
             imagePromises.push(imageRef.getDownloadURL());
         })
