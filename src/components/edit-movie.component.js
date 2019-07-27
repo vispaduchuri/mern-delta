@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import firebase from '../config/config';
 
 
 export default class EditMovie extends Component {
@@ -12,6 +13,7 @@ export default class EditMovie extends Component {
         this.onChangeposter = this.onChangeposter.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
         this.onChangecast = this.onChangecast.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -100,6 +102,16 @@ export default class EditMovie extends Component {
         })
     }
 
+
+    uploadFile(event) {
+        const {moviename}=this.state;
+        var file = event.target.files[0];
+        console.log(file);
+        
+        var stor = firebase.storage().ref(moviename);
+        stor.put(file);
+          // axios.post('/files', data)...
+        }
       onSubmit(e) {
         e.preventDefault();
     
@@ -147,9 +159,16 @@ export default class EditMovie extends Component {
             <textarea  type="text"
                 required
                 className="form-control"
-                value={this.state.plot}
+                value={this.state.plot}   
                 onChange={this.onChangeDescription}
                 />
+          </div>
+
+          <div className="upload-group" id="file">
+              <label>Upload Image : </label>
+              <input type="file" className="upload-group" onChange={this.uploadFile} id="fileButton"/>
+              
+              
           </div>
           {/* <div className="form-group"> 
             <label>Cast: </label>
