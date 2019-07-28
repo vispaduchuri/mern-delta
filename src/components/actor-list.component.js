@@ -5,7 +5,7 @@ export default class ActorList extends Component {
         return (
             <div>
                 <p>
-                    You are in actor create page.
+                    To be added after Version 1 to display all actors with img.
                 </p>
             </div>
         );

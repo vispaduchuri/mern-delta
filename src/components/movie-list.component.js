@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import firebase from '../config/config';
-
+import logo from  '../logo.svg';
 
 var storage = firebase.storage();
 const Movie = props => (
@@ -18,10 +18,12 @@ const Movie = props => (
         
       <td>{props.movie.cast}</td>
       <td>
-        <Link to={"/edit/"+props.movie._id}>edit</Link> | <a href="#" onClick={() => { props.deletemovie(props.movie._id) }}>delete</a>
+        <img src={logo}/>
+        <Link to={"/edit/"+props.movie._id}>Edit</Link> 
       </td>
     </tr>
   )
+  //| <a href="#" onClick={() => { props.(props.movie._id) }}>delete</a> Put this code to delete movie
 
 export default class MovieList extends Component {
     constructor(props)
@@ -58,7 +60,7 @@ export default class MovieList extends Component {
      
         const {movies}= this.state;
         console.log(movies)
-        console.log(123)
+        
         const imageIds = [];
         
          movies.forEach((doc )=>{
@@ -90,6 +92,7 @@ export default class MovieList extends Component {
     deletemovie(id){
         axios.delete('http://localhost:5000/movies/' + id)
         .then( res => console.log(res));
+        
 
         this.setState({
             movies : this.state.movies.filter(el => el._id !== id)
@@ -113,7 +116,7 @@ export default class MovieList extends Component {
                 <th>Image</th>
                   <th>Movie Name</th>
                   <th>Year of Release</th>
-                  <th>Poster</th>
+                  <th>Box Office</th>
                   <th>Plot</th>
                   
                   <th>Cast</th>

@@ -7,6 +7,8 @@
     "bootstrap": "^4.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-multiselect-checkboxes": "^0.1.1",
+    "react-picky": "^4.5.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1"
   },

@@ -180,7 +180,7 @@ export default class EditMovie extends Component {
                 />
           </div> */}
           <div className="form-group"> 
-            <label>Poster: </label>
+            <label>Box Office: </label>
             <input  type="text"
                 required
                 className="form-control"

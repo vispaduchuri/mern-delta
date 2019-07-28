@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from '../config/config';
+import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 
 
 export default class MovieAddList extends Component {
@@ -26,6 +27,7 @@ export default class MovieAddList extends Component {
             plot:'',
             actor : [],
             cast:'',
+            // cast : [],
 
         }
         
@@ -173,7 +175,7 @@ export default class MovieAddList extends Component {
                 />
           </div> */}
           <div className="form-group"> 
-            <label>Poster: </label>
+            <label>Box Office: </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -184,20 +186,26 @@ export default class MovieAddList extends Component {
 {
           <div className="form-group"> 
             <label>Actor Name: </label>
+           
             <select type="checkbox" ref="userInput"
                 required
-                className="form-control"
+                className="form-control" 
                 value = {this.state.cast}
                 onChange={this.onChangecast}>
                 {
                   this.state.actor.map(function(user) {
+                    
                     return <option 
+                    
                       key={user}
                       value={user}>{user}
                       </option>;
                   })
                 }
+                
             </select>
+            
+           
           </div> }
           
           

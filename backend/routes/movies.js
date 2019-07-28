@@ -11,6 +11,7 @@ router.route('/add').post((req,res)=>{
     const poster=req.body.poster;
     const plot = req.body.plot;
     const cast = req.body.cast;
+    
 
     const newmovie = new movie({
         moviename,
@@ -31,6 +32,8 @@ router.route('/:id').get((req,res)=>{
 router.route('/:id').delete((req, res) => {
     Exercise.findByIdAndDelete(req.params.id)
       .then(() => res.json('Movie deleted.'))
+    movie.findByIdAndDelete(req.params.id)
+      .then(res => res.json('Movie deleted.'))
       .catch(err => res.status(400).json('Error: ' + err));
   });
 router.route('/update/:id').post((req,res)=>{
