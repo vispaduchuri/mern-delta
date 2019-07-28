@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from '../config/config';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
-
+import Picky from "react-picky";
+import "react-picky/dist/picky.css";
 
 export default class MovieAddList extends Component {
     constructor(props)
@@ -25,8 +26,9 @@ export default class MovieAddList extends Component {
             yearofrelease:'',
             poster:'',
             plot:'',
-            actor : [],
-            cast:'',
+            actor : [],//value
+            cast:[], //Arrayvalue
+            value:null,
             // cast : [],
 
         }
@@ -39,7 +41,7 @@ export default class MovieAddList extends Component {
             if(res.data.length>0){
                 this.setState ({
                     actor : res.data.map(user => user.actorname),
-                    cast  : res.data[0].actorname,
+                    // cast  : res.data[0].actorname,
                     
                 })
             }
@@ -79,7 +81,7 @@ export default class MovieAddList extends Component {
 
       onChangecast(e){
           this.setState({
-              cast :   e.target.value
+              cast :   e
           })
       }
 
@@ -117,7 +119,7 @@ export default class MovieAddList extends Component {
 
        
 
-        window.location='/';
+        // window.location='/';
     }
 
     
@@ -187,7 +189,7 @@ export default class MovieAddList extends Component {
           <div className="form-group"> 
             <label>Actor Name: </label>
            
-            <select type="checkbox" ref="userInput"
+            {/* <select type="checkbox" ref="userInput"
                 required
                 className="form-control" 
                 value = {this.state.cast}
@@ -203,7 +205,18 @@ export default class MovieAddList extends Component {
                   })
                 }
                 
-            </select>
+            </select> */}
+
+<Picky
+              value={this.state.cast}
+              options={this.state.actor}
+              onChange={this.onChangecast}
+              
+              valueKey="id"
+              labelKey="name"
+              multiple={true}
+              
+            />
             
            
           </div> }

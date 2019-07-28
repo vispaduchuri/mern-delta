@@ -7,7 +7,7 @@ const moviesSchema = new Schema({
     yearofrelease:{ type: String, required:true},
     poster:{type:String, required:true},
     plot:{type: String, required:true  },
-    cast:{type:String,required:true},
+    cast:[{type:String,required:true}],
 }, {
     timestamps : true,
 });

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from '../config/config';
+import Picky from "react-picky";
+import "react-picky/dist/picky.css";
+
 
 
 export default class EditMovie extends Component {
@@ -26,7 +29,8 @@ export default class EditMovie extends Component {
             poster:'',
             plot:'',
             actor : [],
-            cast:'',
+            cast:[], //Arrayvalue
+            value:null,
 
         }
         
@@ -91,10 +95,10 @@ export default class EditMovie extends Component {
       }
 
       onChangecast(e){
-          this.setState({
-              cast :   e.target.value
-          })
-      }
+        this.setState({
+            cast :   e
+        })
+    }
 
       onChangeposter(e){
         this.setState({
@@ -191,7 +195,7 @@ export default class EditMovie extends Component {
 {
           <div className="form-group"> 
             <label>Actor Name: </label>
-            <select type="checkbox" ref="userInput"
+            {/* <select type="checkbox" ref="userInput"
                 required
                 className="form-control"
                 value={this.state.cast}
@@ -204,7 +208,19 @@ export default class EditMovie extends Component {
                       </option>;
                   })
                 }
-            </select>
+            </select> */}
+
+            <Picky
+              value={this.state.cast}
+              options={this.state.actor}
+              onChange={this.onChangecast}
+              
+              valueKey="id"
+              labelKey="name"
+              multiple={true}
+              
+            />
+            
           </div> }
           
           
