@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Step 1 : After Downloading the File from Github, open a terminal in the server.js file and run the following command 'node server.js' to start the server at port 5000 and set up the MongoDB connection. 
+Step 1 : After Downloading the Project from Github, open the Project in a Text editor. open a terminal in the server.js file and run the following command 'node server.js' to start the server at port 5000 and set up the MongoDB connection. 
 
 Step 2 : Run npm start to run the app in development mode and you will be sent to a page that looks like the screenshot below.
 
