@@ -19,6 +19,11 @@ The MongoDB Atlas will be Updated whenever the user either adds a Movie or an Ac
 Firebase Storage will be updated when the user uploads a Movie Image.
 ![](images/Firebase.png)
 
+Step 5 : Click on Edit to edit any details of the movie or Click on Delete to delete the movie from MongoDB.
+![](images/homepage.png)
+![](images/editMovie.png)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
