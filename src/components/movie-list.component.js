@@ -6,7 +6,7 @@ import logo from  '../logo.svg';
 
 var storage = firebase.storage();
 const Movie = props => (
-    console.log(props),
+    
     <tr>
         <td>
         <img alt={props.movie.moviename} src={props.movie.src} />
@@ -19,7 +19,7 @@ const Movie = props => (
       <td>{props.movie.cast}</td>
       <td>
         <img src={logo}/>
-        <Link to={"/edit/"+props.movie._id}>Edit</Link> 
+        <Link to={"/edit/"+props.movie._id}>Edit</Link>  | <a href="#" onClick={() => { props.deletemovie(props.movie._id) }}>delete</a>
       </td>
     </tr>
   )
@@ -90,7 +90,7 @@ export default class MovieList extends Component {
 
 
     deletemovie(id){
-        axios.delete('http://localhost:5000/movies/' + id)
+        axios.delete('http://localhost:5000/movies/'+id)
         .then( res => console.log(res));
         
 

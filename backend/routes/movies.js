@@ -30,11 +30,11 @@ router.route('/:id').get((req,res)=>{
     .catch(err=> res.status(400).json('Error:'+err));
 });
 // Add this to enable Delete Option.
-// router.route('/:id').delete((req, res) => {
-//     movie.findByIdAndDelete(req.params.id)
-//       .then(res => res.json('Movie deleted.'))
-//       .catch(err => res.status(400).json('Error: ' + err));
-//   });
+router.route('/:id').delete((req, res) => {
+    movie.findByIdAndDelete(req.params.id)
+      .then( () => console.log("Movie Deleted!"))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
 router.route('/update/:id').post((req,res)=>{
     movie.findById(req.params.id)
     .then(movie=>{
